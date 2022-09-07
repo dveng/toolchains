@@ -121,7 +121,7 @@ if (host_toolchain == "") {
             host_toolchain = "//build/toolchain/linux:gcc_like_host"
         }else if (is_clang){
             host_toolchain = "//build/toolchain/linux:clang_$host_cpu"
-#            host_toolchain = "//build/toolchain/linux:$host_cpu"
+        #            host_toolchain = "//build/toolchain/linux:$host_cpu"
         }else{
             host_toolchain = "//build/toolchain/linux:$host_cpu"
         }
@@ -156,14 +156,18 @@ if (target_os == "android") {
 } else if (target_os == "linux") {
     print("target_os is_clang=${is_clang}")
     if (is_clang) {
-#        _default_toolchain = "//build/toolchain/linux:clang_$target_cpu"
-            _default_toolchain = "//build/toolchain/linux:$target_cpu"
+    #        _default_toolchain = "//build/toolchain/linux:clang_$target_cpu"
+        _default_toolchain = "//build/toolchain/linux:$target_cpu"
     } else {
         print("target_os else is_clang=${is_clang}")
         _default_toolchain = "//build/toolchain/linux:$target_cpu"
     #        _default_toolchain = "//build/toolchain/linux:arm64"
     }
-} else {
+} else if (target_os == "linux"){
+    _default_toolchain = "//build/toolchain/linux:$target_cpu"
+}else if(target_os == "win"){
+    _default_toolchain = "//build/toolchain/win:$target_cpu"
+}else{
     assert(false, "Unsupported target_os: $target_os")
 }
 print("is_clang=${is_clang}")
