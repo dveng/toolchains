@@ -1,0 +1,171 @@
+# Set build arguments here. See `gn help buildargs`.
+# target_os = "win"
+# target_os = "linux"
+# target_os = "android"
+
+target_cpu = "arm"
+# target_cpu = "x86"
+# target_cpu = "x64"
+
+$ gn args --list out
+WARNING at build arg file (use "gn args <out_dir>" to edit):1:6: Build argument has no effect.
+os = "android"
+     ^--------
+Did you mean "ar"?
+
+The variable "os" was set as a build argument
+but never appeared in a declare_args() block in any buildfile.
+
+To view all possible args, run "gn args --list <out_dir>"
+
+The build continued as if that argument was unspecified.
+
+ar
+    Current value (from the default) = "ar"
+      From //build/BUILDCONFIG.gn:9
+
+cc
+    Current value (from the default) = "cc"
+      From //build/BUILDCONFIG.gn:10
+
+cc_wrapper
+    Current value (from the default) = ""
+      From //build/toolchain/BUILD.gn:10
+
+clang_win
+    Current value (from the default) = ""
+      From //build/BUILDCONFIG.gn:13
+
+current_cpu
+    Current value (from the default) = ""
+      (Internally set; try `gn help current_cpu`.)
+
+current_os
+    Current value (from the default) = ""
+      (Internally set; try `gn help current_os`.)
+
+cxx
+    Current value (from the default) = "c++"
+      From //build/BUILDCONFIG.gn:11
+
+fyi_sanitize
+    Current value (from the default) = ""
+      From //build/BUILDCONFIG.gn:17
+
+gcc_win
+    Current value (from the default) = ""
+      From //build/BUILDCONFIG.gn:14
+
+host_ar
+    Current value (from the default) = "ar"
+      From //build/toolchain/BUILD.gn:2
+
+host_cc
+    Current value (from the default) = "cc"
+      From //build/toolchain/BUILD.gn:3
+
+host_cpu
+    Current value (from the default) = "x64"
+      (Internally set; try `gn help host_cpu`.)
+
+host_cxx
+    Current value (from the default) = "c++"
+      From //build/toolchain/BUILD.gn:4
+
+host_os
+    Current value (from the default) = "linux"
+      (Internally set; try `gn help host_os`.)
+
+is_component_build
+    Current value (from the default) = false
+      From //build/BUILDCONFIG.gn:7
+
+is_debug
+    Current value (from the default) = true
+      From //build/BUILDCONFIG.gn:21
+
+is_official_build
+    Current value (from the default) = false
+      From //build/BUILDCONFIG.gn:6
+
+sanitize
+    Current value (from the default) = ""
+      From //build/BUILDCONFIG.gn:16
+
+target_ar
+    Current value (from the default) = "ar"
+      From //build/toolchain/BUILD.gn:6
+
+target_cc
+    Current value (from the default) = "cc"
+      From //build/toolchain/BUILD.gn:7
+
+target_cpu
+    Current value (from the default) = ""
+      (Internally set; try `gn help target_cpu`.)
+
+target_cxx
+    Current value (from the default) = "c++"
+      From //build/toolchain/BUILD.gn:8
+
+target_os
+    Current value (from the default) = ""
+      (Internally set; try `gn help target_os`.)
+
+$ gn help buildargs
+Build Arguments Overview
+
+  Build arguments are variables passed in from outside of the build that build
+  files can query to determine how the build works.
+
+How build arguments are set
+
+  First, system default arguments are set based on the current system. The
+  built-in arguments are:
+   - host_cpu
+   - host_os
+   - current_cpu
+   - current_os
+   - target_cpu
+   - target_os
+
+  Next, project-specific overrides are applied. These are specified inside
+  the default_args variable of //.gn. See "gn help dotfile" for more.
+
+  If specified, arguments from the --args command line flag are used. If that
+  flag is not specified, args from previous builds in the build directory will
+  be used (this is in the file args.gn in the build directory).
+
+  Last, for targets being compiled with a non-default toolchain, the toolchain
+  overrides are applied. These are specified in the toolchain_args section of a
+  toolchain definition. The use-case for this is that a toolchain may be
+  building code for a different platform, and that it may want to always
+  specify Posix, for example. See "gn help toolchain" for more.
+
+  If you specify an override for a build argument that never appears in a
+  "declare_args" call, a nonfatal error will be displayed.
+
+Examples
+
+  gn args out/FooBar
+      Create the directory out/FooBar and open an editor. You would type
+      something like this into that file:
+          enable_doom_melon=false
+          os="android"
+
+  gn gen out/FooBar --args="enable_doom_melon=true os=\"android\""
+      This will overwrite the build directory with the given arguments. (Note
+      that the quotes inside the args command will usually need to be escaped
+      for your shell to pass through strings values.)
+
+How build arguments are used
+
+  If you want to use an argument, you use declare_args() and specify default
+  values. These default values will apply if none of the steps listed in the
+  "How build arguments are set" section above apply to the given argument, but
+  the defaults will not override any of these.
+
+  Often, the root build config file will declare global arguments that will be
+  passed to all buildfiles. Individual build files can also specify arguments
+  that apply only to those files. It is also useful to specify build args in an
+  "import"-ed file if you want such arguments to apply to multiple buildfiles.
