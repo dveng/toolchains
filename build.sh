@@ -23,7 +23,7 @@ if [ -n "${arch}" ];then
 fi
 
 python3 "${root_path}/build.py" ${log} ${build_arch}
-
+echo ""
 echo -e "\e[32m[RUN INFO]: \c"
 echo ""
 ( out/hello )

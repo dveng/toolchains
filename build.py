@@ -8,6 +8,17 @@ import platform
 import subprocess
 import sys
 
+ROOT_PATH = os.getcwd()
+BIN_DIR = os.path.join(ROOT_PATH, "build", 'bin')
+gn_executable = ""
+ninja_executable = ""
+if platform.system() == "Linux":
+    gn_executable = os.path.join(BIN_DIR, 'linux', 'gn')
+    ninja_executable = os.path.join(BIN_DIR, 'linux', 'ninja')
+elif platform.system() == "Windows":
+    gn_executable = os.path.join(BIN_DIR, 'win', 'gn.exe')
+    ninja_executable = os.path.join(BIN_DIR, 'win', 'ninja.exe')
+
 
 def exec_command(cmd, log_path='run.log', **kwargs):
     """
@@ -160,6 +171,8 @@ def parsers():
 
 
 if __name__ == "__main__":
+    gn = gn_executable if gn_executable else "gn"
+    ninja = ninja_executable if ninja_executable else "ninja"
     args = parsers()
     log = '-v' if args.log else " "
 
@@ -169,11 +182,11 @@ if __name__ == "__main__":
 
     root_dir = os.getcwd()
     output = os.path.join(root_dir, "out")
-    clean_output = ['gn', 'clean', output]
-    gen_ninja = ['gn', 'gen', log, '-C', "out", arch]
+    clean_output = [gn, 'clean', output]
+    gen_ninja = [gn, 'gen', log, '-C', "out", arch]
 
     exec_command(clean_output, cwd=root_dir)
     exec_command(gen_ninja, cwd=root_dir)
-    exec_command('ninja', cwd=output)
+    exec_command(ninja, cwd=output)
 
     # exec_command(cmd=['ping', '127.0.0.1'])
