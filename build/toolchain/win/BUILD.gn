@@ -148,14 +148,6 @@ template("gcc_like_toolchain") {
     }
 }
 
-gcc_like_toolchain("x64") {
-    cpu = current_cpu
-    os = current_os
-    ar = target_ar
-    cc = target_cc
-    cxx = target_cxx
-}
-
 gcc_like_toolchain("win_clang_host") {
     cpu = host_cpu
     os = host_os
@@ -173,6 +165,38 @@ gcc_like_toolchain("win_gcc") {
 }
 
 gcc_like_toolchain("win_gcc_host") {
+    cpu = host_cpu
+    os = host_os
+    ar = host_ar
+    cc = host_cc
+    cxx = host_cxx
+}
+
+gcc_like_toolchain("x64") {
+    cpu = current_cpu
+    os = current_os
+    ar = target_ar
+    cc = target_cc
+    cxx = target_cxx
+}
+
+gcc_like_toolchain("x86") {
+    cpu = host_cpu
+    os = host_os
+    ar = host_ar
+    cc = host_cc
+    cxx = host_cxx
+}
+
+gcc_like_toolchain("arm64") {
+    cpu = host_cpu
+    os = host_os
+    ar = host_ar
+    cc = host_cc
+    cxx = host_cxx
+}
+
+gcc_like_toolchain("arm") {
     cpu = host_cpu
     os = host_os
     ar = host_ar
