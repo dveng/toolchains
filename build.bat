@@ -1,4 +1,4 @@
-@REM @echo off
+@echo off
 
 set root_path=%~dp0
 set log=%1

@@ -176,17 +176,17 @@ if __name__ == "__main__":
     args = parsers()
     log = '-v' if args.log else " "
 
-    arch = '--args="target_cpu=\\"arm64\\""' if args.args else " "
+    arch = r'--args="target_cpu=\"arm64\""' if args.args else " "
     # print(f"log:{log}")
+    print(f"arg:{args.args}")
     print(f"arch:{arch}")
 
-    root_dir = os.getcwd()
-    output = os.path.join(root_dir, "out")
+    output = os.path.join(ROOT_PATH, "out")
     clean_output = [gn, 'clean', output]
     gen_ninja = [gn, 'gen', log, '-C', "out", arch]
 
-    exec_command(clean_output, cwd=root_dir)
-    exec_command(gen_ninja, cwd=root_dir)
+    exec_command(clean_output, cwd=ROOT_PATH)
+    exec_command(gen_ninja, cwd=ROOT_PATH)
     exec_command(ninja, cwd=output)
 
     # exec_command(cmd=['ping', '127.0.0.1'])

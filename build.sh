@@ -19,7 +19,7 @@ do
 done
 
 if [ -n "${arch}" ];then
-    build_arch="--args ${arch}"
+    build_arch="--args target_cpu=\"${arch}\""
 fi
 
 python3 "${root_path}/build.py" ${log} ${build_arch}
@@ -33,3 +33,4 @@ echo -e "\e[0m"
 
 exit 0
 gn gen -C out --args="target_cpu=\"arm64\"" && ninja -C out
+gn gen -C out --args="target_cpu=\"arm64\"" && ninja -C out && file out/hello
