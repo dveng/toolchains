@@ -2,10 +2,15 @@
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 
+import("//run_helper.gni")
+
 executable("hello") {
+  include_dirs = [ "cammond/include" ]
+
   sources = [ "hello.cc" ]
 
   deps = [
+    "cammond:exec_shared",
     ":hello_shared",
     ":hello_static",
   ]

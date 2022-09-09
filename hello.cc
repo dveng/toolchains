@@ -6,8 +6,10 @@
 
 #include "hello_shared.h"
 #include "hello_static.h"
+#include "exec.h"
 
 int main(int argc, char* argv[]) {
   printf("%s, %s\n", GetStaticText(), GetSharedText());
+  outprint("uname -a");
   return 0;
 }
