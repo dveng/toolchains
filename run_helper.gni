@@ -1,0 +1,28 @@
+template("host_run_action") {
+  _target_name_ = invoke.target_name # "${target_name}"
+
+  # host running
+  action("${_target_name_}Action") {
+    testonly = true
+
+    _host_test_target_ = ":${_target_name_}(${host_toolchain})"
+    _root_out_dir_ = get_label_info(_host_test_target_, "root_out_dir")
+    deps = [ _host_test_target_ ]
+
+    script = "//test_script.py"
+
+    args = [
+      "--script-file",
+      rebase_path(_root_out_dir_) + "/${_target_name_}",
+      "--expect-output",
+      "0",
+      "--timeout-limit",
+      "1200",
+    ]
+
+    inputs = [
+      "//out/${_target_name_}",
+    ]
+    outputs = [ "//out/${_target_name_}/" ]
+  }
+}

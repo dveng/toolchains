@@ -5,12 +5,12 @@
 import("//run_helper.gni")
 
 executable("hello") {
-  include_dirs = [ "cammond/include" ]
+  include_dirs = [ "command/include" ]
 
   sources = [ "hello.cc" ]
 
   deps = [
-    "cammond:exec_shared",
+    "command:exec_shared",
     ":hello_shared",
     ":hello_static",
   ]
@@ -31,3 +31,26 @@ static_library("hello_static") {
     "hello_static.h",
   ]
 }
+
+host_run_action("myhello"){
+  target_name = "hello"
+  deps=[]
+}
+
+#action("myhello") {
+#    testonly = true
+##    _target_name_ = "${target_name}"
+#    _target_name_ = ":hello"
+#    #        deps = [ ":${_target_name_}" ]
+#    #        _run_path_ = "$output_dir/${_target_name_}"
+#
+#    args = [
+#        "//out/hello"
+#    ]
+#    script = "test_script.py"
+#
+#    #        inputs = [
+#    #            "//out/${_target_name_}",
+#    #        ]
+#    outputs = [ "//out/${_target_name_}.log" ]
+#}
