@@ -32,5 +32,6 @@ echo -e "\n[Binary INFO]:\c"
 echo -e "\e[0m"
 
 exit 0
-gn gen -C out --args="target_cpu=\"arm64\"" && ninja -C out
+gn gen -C out --args="target_cpu=\"arm\"" && ninja -C out && file out/hello
 gn gen -C out --args="target_cpu=\"arm64\"" && ninja -C out && file out/hello
+gn gen -C out --args="target_cpu=\"x64\"" && ninja -C out && file out/hello && out/hello
