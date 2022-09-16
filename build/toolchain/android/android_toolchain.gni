@@ -2,8 +2,8 @@
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 
-import("//build/config/andriod/config.gni")
-import("//build/config/clang/clang.gni")
+#import("//build/config/andriod/config.gni")
+#import("//build/config/clang/clang.gni")
 import("//build/toolchain/gcc_toolchain.gni")
 
 declare_args() {
@@ -29,15 +29,15 @@ declare_args() {
 #      Subdirectory inside of sysroot where libs go.
 #  - binary_prefix
 #      Prefix of compiler executables.
-template("andriod_clang_toolchain") {
-  gcc_toolchain(target_name) {
+template("android_clang_toolchain") {
+  gcc_like_toolchain(target_name) {
     assert(defined(invoker.toolchain_args),
            "toolchain_args must be defined for andriod_clang_toolchain()")
     toolchain_args = invoker.toolchain_args
-    toolchain_args.current_os = "andriod"
+    toolchain_args.current_os = "android"
 
     # Output linker map files for binary size analysis.
-    enable_linker_map = true
+#    enable_linker_map = true
 
     andriod_libc_dir =
         rebase_path(invoker.sysroot + "/" + invoker.lib_dir, root_build_dir)
@@ -47,25 +47,26 @@ template("andriod_clang_toolchain") {
     solink_libs_section_prefix = " ${andriod_libc_dir}/crti.o"
     solink_libs_section_postfix = "${andriod_libc_dir}/crtn.o"
 
+    clang_base_path = "/home/linux/native/llvm"
     _prefix = rebase_path("${clang_base_path}/bin", root_build_dir)
+    ar = "${_prefix}/llvm-ar"
     cc = "${_prefix}/clang"
     cxx = "${_prefix}/clang++"
-    ar = "${_prefix}/llvm-ar"
     ld = cxx
-    readelf = "${_prefix}/llvm-readobj"
-    nm = "${_prefix}/llvm-nm"
+#    readelf = "${_prefix}/llvm-readobj"
+#    nm = "${_prefix}/llvm-nm"
     if (!is_debug) {
       strip = rebase_path("${clang_base_path}/bin/llvm-strip", root_build_dir)
       use_unstripped_as_runtime_outputs = andriod_unstripped_runtime_outputs
     }
-    extra_cflags = andriod_extra_cflags
-    extra_cppflags = andriod_extra_cppflags
-    extra_cxxflags = andriod_extra_cxxflags
-    extra_asmflags = andriod_extra_asmflags
-    extra_ldflags = andriod_extra_ldflags
+#    extra_cflags = andriod_extra_cflags
+#    extra_cppflags = andriod_extra_cppflags
+#    extra_cxxflags = andriod_extra_cxxflags
+#    extra_asmflags = andriod_extra_asmflags
+#    extra_ldflags = andriod_extra_ldflags
 
     # Don't use .cr.so for loadable_modules since they are always loaded via
     # absolute path.
-    loadable_module_extension = ".so"
+#    loadable_module_extension = ".so"
   }
 }
