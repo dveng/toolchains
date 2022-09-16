@@ -1,5 +1,5 @@
 template("host_run_action") {
-  _target_name_ = invoke.target_name # "${target_name}"
+  _target_name_ = "${target_name}"
 
   # host running
   action("${_target_name_}Action") {

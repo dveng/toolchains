@@ -2,7 +2,7 @@
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 
-import("//run_helper.gni")
+#import("//run_helper.gni")
 
 executable("hello") {
   include_dirs = [ "command/include" ]
@@ -32,10 +32,10 @@ static_library("hello_static") {
   ]
 }
 
-host_run_action("myhello"){
-  target_name = "hello"
-  deps=[]
-}
+#host_run_action("myhello"){
+#  target_name = "hello"
+#  deps=[]
+#}
 
 #action("myhello") {
 #    testonly = true

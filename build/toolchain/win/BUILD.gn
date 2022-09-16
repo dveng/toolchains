@@ -1,103 +1,105 @@
 import("//build/toolchain/gcc_toolchain.gni")
 
-declare_args(){
-    ar = "ar"
-    cc = "gcc"
-    cxx = "g++"
-#    ld = cxx
+declare_args() {
+  ar = "ar"
+  cc = "gcc"
+  cxx = "g++"
+
+  #    ld = cxx
 }
 declare_args() {
-    host_ar = ar
-    host_cc = cc
-    host_cxx = cxx
+  host_ar = ar
+  host_cc = cc
+  host_cxx = cxx
 
-    target_ar = ar
-    target_cc = cc
-    target_cxx = cxx
+  target_ar = ar
+  target_cc = cc
+  target_cxx = cxx
 
-    cc_wrapper = ""
+  cc_wrapper = ""
 }
 
 gcc_like_toolchain("win_clang_host") {
-    ar = host_ar
-    cc = host_cc
-    cxx = host_cxx
-    ld = cxx
-    #    ar = host_ar
-    #    cc = host_cc
-    #    cxx = host_cxx
-    #    ld = cxx
-    # nm = "nm"
-    # readelf = "readelf"
+  ar = host_ar
+  cc = host_cc
+  cxx = host_cxx
+  ld = cxx
 
-    toolchain_args = {
-        current_cpu = host_cpu
-        current_os = host_os
-    }
+  #    ar = host_ar
+  #    cc = host_cc
+  #    cxx = host_cxx
+  #    ld = cxx
+  # nm = "nm"
+  # readelf = "readelf"
+
+  toolchain_args = {
+    current_cpu = host_cpu
+    current_os = host_os
+  }
 }
 
 gcc_like_toolchain("win_gcc") {
-    ar = target_ar
-    cc = target_cc
-    cxx = target_cxx
-    ld = cxx
-    toolchain_args = {
-        current_cpu = host_cpu
-        current_os = host_os
-    }
+  ar = target_ar
+  cc = target_cc
+  cxx = target_cxx
+  ld = cxx
+  toolchain_args = {
+    current_cpu = host_cpu
+    current_os = host_os
+  }
 }
 
 gcc_like_toolchain("win_gcc_host") {
-    ar = host_ar
-    cc = host_cc
-    cxx = host_cxx
-    ld = cxx
-    toolchain_args = {
-        current_cpu = host_cpu
-        current_os = host_os
-    }
+  ar = host_ar
+  cc = host_cc
+  cxx = host_cxx
+  ld = cxx
+  toolchain_args = {
+    current_cpu = host_cpu
+    current_os = host_os
+  }
 }
 
 gcc_like_toolchain("x64") {
-    ar = target_ar
-    cc = target_cc
-    cxx = target_cxx
-    ld = cxx
-    toolchain_args = {
-        current_cpu = current_cpu
-        current_os = current_os
-    }
+  ar = target_ar
+  cc = target_cc
+  cxx = target_cxx
+  ld = cxx
+  toolchain_args = {
+    current_cpu = current_cpu
+    current_os = current_os
+  }
 }
 
 gcc_like_toolchain("x86") {
-    ar = host_ar
-    cc = host_cc
-    cxx = host_cxx
-    ld = cxx
-    toolchain_args = {
-        current_cpu = host_cpu
-        current_os = host_os
-    }
+  ar = host_ar
+  cc = host_cc
+  cxx = host_cxx
+  ld = cxx
+  toolchain_args = {
+    current_cpu = host_cpu
+    current_os = host_os
+  }
 }
 
 gcc_like_toolchain("arm64") {
-    ar = host_ar
-    cc = host_cc
-    cxx = host_cxx
-    ld = cxx
-    toolchain_args = {
-        current_cpu = host_cpu
-        current_os = host_os
-    }
+  ar = host_ar
+  cc = host_cc
+  cxx = host_cxx
+  ld = cxx
+  toolchain_args = {
+    current_cpu = host_cpu
+    current_os = host_os
+  }
 }
 
 gcc_like_toolchain("arm") {
-    ar = host_ar
-    cc = host_cc
-    cxx = host_cxx
-    ld = cxx
-    toolchain_args = {
-        current_cpu = host_cpu
-        current_os = host_os
-    }
+  ar = host_ar
+  cc = host_cc
+  cxx = host_cxx
+  ld = cxx
+  toolchain_args = {
+    current_cpu = host_cpu
+    current_os = host_os
+  }
 }

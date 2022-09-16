@@ -25,9 +25,9 @@ fi
 python3 "${root_path}/build.py" ${log} ${build_arch}
 echo ""
 echo -e "\e[32m[RUN INFO]: \c"
-echo ""
 ( out/hello )
-echo ""
+
+echo -e "\n[Binary INFO]:\c"
 (file out/hello)
 echo -e "\e[0m"
 
