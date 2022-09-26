@@ -1,15 +1,3 @@
-#declare_args() {
-#    host_ar = ar
-#    host_cc = cc
-#    host_cxx = cxx
-#
-#    target_ar = ar
-#    target_cc = cc
-#    target_cxx = cxx
-#
-#    cc_wrapper = ""
-#}
-
 if (host_os == "win") {
   stamp = "cmd.exe /c echo >"
 } else {
@@ -44,12 +32,13 @@ template("gcc_like_toolchain") {
            "toolchain_args must specify a current_cpu")
     assert(defined(invoker_toolchain_args.current_os),
            "toolchain_args must specify a current_os")
-#    forward_variables_from(invoker_toolchain_args, "*")
+
+    #    forward_variables_from(invoker_toolchain_args, "*")
     toolchain_args = {
       forward_variables_from(invoker_toolchain_args, "*")
     }
 
-#    host_toolchain = host_toolchain
+    #    host_toolchain = host_toolchain
 
     ar = invoker.ar
     cc = invoker.cc

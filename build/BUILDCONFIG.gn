@@ -5,15 +5,9 @@
 declare_args() {
   is_official_build = false
   is_component_build = false
-  is_clang = current_os != "linux"
   host_toolchain = ""
 }
 
-#declare_args() {
-#    ar = "ar"
-#    cc = "cc"
-#    cxx = "c++"
-#}
 android_toolchain ="//build/toolchain/android:android_clang_$target_cpu"
 
 declare_args() {
@@ -40,9 +34,9 @@ if (current_os == "") {
   current_os = target_os
 }
 
-# is_linux = current_os == "linux"
-# is_mac = current_os == "mac"
-# is_win = current_os == "win"
+declare_args() {
+  is_clang = current_os != "linux"
+}
 
 if (current_os == "win" || current_os == "winuwp") {
   is_android = false
@@ -86,14 +80,6 @@ if (current_os == "win" || current_os == "winuwp") {
   is_mingw = true
 }
 
-# is_linux = host_os == "linux" && current_os == "linux" && target_os == "linux"
-# is_mac = host_os == "mac" && current_os == "mac" && target_os == "mac"
-# is_win = host_os == "win" && current_os == "win" && target_os == "win"
-
-# Set to true when compiling with the Clang compiler.
-# is_clang = exec_script("//build/toolchain/script/is_clang.py", [], "value")
-is_gcc = current_os == "linux"
-
 # All binary targets will get this list of configs by default.
 _shared_binary_target_configs = [ "//build:compiler_defaults" ]
 
@@ -119,7 +105,8 @@ if (host_toolchain == "") {
   if (host_os == "linux") {
     if (target_os != "") {
       #            host_toolchain = "//build/toolchain/linux:clang_$host_cpu"
-      host_toolchain = "//build/toolchain/linux:gcc_like_host"
+      # host_toolchain = "//build/toolchain/linux:gcc_like_host"
+      host_toolchain = "//build/toolchain/linux:$host_cpu"
     } else if (is_clang) {
       host_toolchain = "//build/toolchain/linux:clang_$host_cpu"
       #            host_toolchain = "//build/toolchain/linux:$host_cpu"

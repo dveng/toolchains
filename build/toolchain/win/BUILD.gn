@@ -4,9 +4,9 @@ declare_args() {
   ar = "ar"
   cc = "gcc"
   cxx = "g++"
-
-  #    ld = cxx
+  ld = cxx
 }
+
 declare_args() {
   host_ar = ar
   host_cc = cc
