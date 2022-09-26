@@ -37,17 +37,6 @@ cc_wrapper = ""
 
 template("gcc_like_toolchain") {
   toolchain(target_name) {
-    assert(defined(invoker.toolchain_args),
-           "Toolchains must specify toolchain_args")
-    invoker_toolchain_args = invoker.toolchain_args
-    assert(defined(invoker_toolchain_args.current_cpu),
-           "toolchain_args must specify a current_cpu")
-    assert(defined(invoker_toolchain_args.current_os),
-           "toolchain_args must specify a current_os")
-    forward_variables_from(invoker_toolchain_args, "*")
-    toolchain_args = {
-      forward_variables_from(invoker_toolchain_args, "*")
-    }
 
 #    host_toolchain = host_toolchain
 
@@ -115,6 +104,17 @@ template("gcc_like_toolchain") {
     #   current_cpu = invoker.current_cpu
     #   current_os = invoker.current_os
     # }
+    assert(defined(invoker.toolchain_args),
+           "Toolchains must specify toolchain_args")
+    invoker_toolchain_args = invoker.toolchain_args
+    assert(defined(invoker_toolchain_args.current_cpu),
+           "toolchain_args must specify a current_cpu")
+    assert(defined(invoker_toolchain_args.current_os),
+           "toolchain_args must specify a current_os")
+#    forward_variables_from(invoker_toolchain_args, "*")
+    toolchain_args = {
+      forward_variables_from(invoker_toolchain_args, "*")
+    }
 
     print("gcc toolchain_args=${toolchain_args}")
 
