@@ -8,6 +8,7 @@ config("compiler_defaults") {
       "-fPIC",
       "-pthread",
     ]
+    cflags_cc = cflags
   }
 }
 
@@ -18,4 +19,22 @@ config("executable_ldconfig") {
       "-Wl,-rpath-link=",
     ]
   }
+}
+
+config("language_c") {
+  cflags_c = [ "-std=c99" ]
+}
+
+config("language_cpp") {
+  cflags_cc = [ "-std=c++11" ]
+}
+
+config("static_pie_config") {
+  cflags = [ "-fPIE" ]
+  cflags_cc = cflags
+}
+
+config("shared_library_config") {
+  cflags = [ "-fPIC" ]
+  cflags_cc = cflags
 }

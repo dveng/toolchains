@@ -7,6 +7,8 @@
 executable("hello") {
   include_dirs = [ "command/include" ]
 
+  cflags_cc = [ "-static" ]
+
   sources = [ "hello.cc" ]
 
   deps = [
@@ -16,19 +18,31 @@ executable("hello") {
   ]
 }
 
+executable("tutorial_hello") {
+  include_dirs = [ "command/include" ]
+
+  cflags_cc = [ "-static" ]
+
+  sources = [ "tutorial/tutorial.cc" ]
+
+  deps = [
+    "command:exec_static",
+  ]
+}
+
 shared_library("hello_shared") {
+  include_dirs = [ "//" ]
   sources = [
     "hello_shared.cc",
-    "hello_shared.h",
   ]
 
   defines = [ "HELLO_SHARED_IMPLEMENTATION" ]
 }
 
 static_library("hello_static") {
+  include_dirs = [ "//" ]
   sources = [
     "hello_static.cc",
-    "hello_static.h",
   ]
 }
 

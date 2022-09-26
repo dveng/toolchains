@@ -44,7 +44,7 @@ template("gcc_like_toolchain") {
            "toolchain_args must specify a current_cpu")
     assert(defined(invoker_toolchain_args.current_os),
            "toolchain_args must specify a current_os")
-    forward_variables_from(invoker_toolchain_args, "*")
+#    forward_variables_from(invoker_toolchain_args, "*")
     toolchain_args = {
       forward_variables_from(invoker_toolchain_args, "*")
     }

@@ -15,15 +15,14 @@ shared_library("exec_shared") {
     include_dirs = [ "include" ]
     sources = [
         "src/exec.c",
-        "include/exec.h",
     ]
 
     defines = [ "HELLO_SHARED_IMPLEMENTATION" ]
 }
 
-#static_library("hello_static") {
-#    sources = [
-#        "hello_static.cc",
-#        "hello_static.h",
-#    ]
-#}
+static_library("exec_static") {
+    include_dirs = [ "include" ]
+    sources = [
+       "src/exec.c",
+   ]
+}

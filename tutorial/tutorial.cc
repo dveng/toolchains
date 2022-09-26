@@ -3,8 +3,10 @@
 // found in the LICENSE file.
 
 #include <stdio.h>
+#include "exec.h"
 
 int main(int argc, char* argv[]) {
   printf("Hello from the tutorial.\n");
+  outprint("uname -a");
   return 0;
 }
